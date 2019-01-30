@@ -19,8 +19,8 @@ export default class Main extends React.Component {
          </TextInput>
        </View>
 
-       <TouchableOpacity>
-        <Text>+</Text>
+       <TouchableOpacity style={styles.buttonText}>
+        <Text style={styles.addButton}>+</Text>
        </TouchableOpacity>
       </View>
     );
@@ -54,6 +54,26 @@ const styles = StyleSheet.create({
 
   footer:{
     color: '#fff',
+  },
+  addButton:{
+    color: 'white',
+    fontSize:55
+  },
+  buttonText:{
+    // position:'absolute',
+    // zIndex:11,
+    // right:20,
+    // bottom:50,
+    // fontSize:60,
+    width:90,
+    height:90,
+    borderRadius:50,
+    backgroundColor: '#405ae8',
+    alignItems:'center',
+    justifyContent:'center',
+    
+    
+
   },
 
   hetextInputader:{
