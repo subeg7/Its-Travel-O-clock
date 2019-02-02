@@ -10,16 +10,18 @@ export default class Main extends React.Component {
     this.state={
       noteArray:[],
       noteText:'',
-      newNote:''
+      newNote:'',
+      myArray:[]
     }
   }
   render() {
+    
     // let notes = this.state.noteArray.map( (val,key)=>{
     //   return <Note key={key} keyval={key} val={val}
     //     deleteMethod={()=>this.deleteNote(key)}/>
     // });
 
-    let notes = ["hello theres","is this amazing"];
+    // let notes = this.state.noteArray.map( (x) =>"this is amazing");
 
     return (
       <View style={styles.container}>
@@ -29,18 +31,20 @@ export default class Main extends React.Component {
 
        {/* <ScrollView style={styles.scrollContainer}> */}
        {/* {notes} */}
-         {/* <Text>{}</Text>  */}
-         {this.state.noteArray}
+         <Text>{this.state.myArray}</Text> 
+         {/* {this.state.noteArray} */}
        {/* </ScrollView > */}
 
        <View style={styles.footer}>
          <TextInput style={styles.textInput} 
          onChangeText={(noteText)=>this.setState({noteText})}
-         value={this.state.noteText}
+        //  value={this.state.noteText}
          placeholder="type the new note here" 
          placeholderTextColor="green">
          </TextInput>
        </View>
+
+       <Text>{this.state.noteText}</Text>
 
        <TouchableOpacity 
        onPress={this.addNote.bind(this)}
@@ -51,7 +55,16 @@ export default class Main extends React.Component {
     );
   }
 
+  // let count=0;
+
   addNote(){
+    // this.state.myArray.push("pushed item");
+    arr=this.state.myArray;
+    arr.push("faster");
+    arr.push("creative");
+    arr.push("world");
+    // this.state.myArray=arr;
+    this.setState({myArray:arr});
 
 
     // console.log("add note is triigered");
@@ -61,7 +74,7 @@ export default class Main extends React.Component {
     var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
     let newNote1 = <Note note="key_from_main_is_Injected" noteDate="injected_prop" /> 
     let newNote2 = <Note note="note_2" noteDate="date_2" /> 
-    arr = array(newNote1,newNote2);
+    // arr = array(newNote1,newNote2);
     // this.state.noteArray.push(newNote1);
     // this.state.note
 
@@ -77,8 +90,13 @@ export default class Main extends React.Component {
       // this.state.noteArray.push({
       //   'date':d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()
       // });
-    
       // this.setState({noteArray:this.state.noteText});
+
+      // console.log("printing the notearray"+this.state.noteArray.toString());
+      // this.state.noteArray.toString();
+
+      // console.log("noteArray__>"+this.state.noteArray[0]);
+    
       // this.setState({noteText:''});
   // }
 }
