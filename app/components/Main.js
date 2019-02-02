@@ -11,8 +11,10 @@ export default class Main extends React.Component {
       noteArray:[],
       noteText:'',
       newNote:'',
-      myArray:[]
+      myArray:["default"]
     }
+
+    this.countValue=0;
   }
   render() {
     
@@ -23,6 +25,11 @@ export default class Main extends React.Component {
 
     // let notes = this.state.noteArray.map( (x) =>"this is amazing");
 
+    let myNotes = this.state.myArray.map( (x)=>{
+        return <Note noteDate={x} />
+        // console.log("value of x:"+x);
+    });
+
     return (
       <View style={styles.container}>
        <View style={styles.header}>
@@ -30,21 +37,21 @@ export default class Main extends React.Component {
        </View>
 
        {/* <ScrollView style={styles.scrollContainer}> */}
-       {/* {notes} */}
-         <Text>{this.state.myArray}</Text> 
+       {myNotes}
+         {/* <Text style={styles.noteText}>{this.state.myArray}</Text>  */}
          {/* {this.state.noteArray} */}
        {/* </ScrollView > */}
 
        <View style={styles.footer}>
          <TextInput style={styles.textInput} 
          onChangeText={(noteText)=>this.setState({noteText})}
-        //  value={this.state.noteText}
+         value={this.state.noteText}
          placeholder="type the new note here" 
          placeholderTextColor="green">
          </TextInput>
        </View>
 
-       <Text>{this.state.noteText}</Text>
+       {/* <Text>{this.state.noteText}</Text> */}
 
        <TouchableOpacity 
        onPress={this.addNote.bind(this)}
@@ -58,18 +65,19 @@ export default class Main extends React.Component {
   // let count=0;
 
   addNote(){
+    if(this.state.noteText){
+
     // this.state.myArray.push("pushed item");
     arr=this.state.myArray;
-    arr.push("faster");
-    arr.push("creative");
-    arr.push("world");
+    arr.push(++this.countValue+")> "+this.state.noteText);
+    
     // this.state.myArray=arr;
     this.setState({myArray:arr});
+    this.setState({noteText:''});
 
 
     // console.log("add note is triigered");
 
-    // if(this.state.noteText){
       var d  = new Date();
     var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
     let newNote1 = <Note note="key_from_main_is_Injected" noteDate="injected_prop" /> 
@@ -98,7 +106,7 @@ export default class Main extends React.Component {
       // console.log("noteArray__>"+this.state.noteArray[0]);
     
       // this.setState({noteText:''});
-  // }
+  }
 }
 
 }
@@ -147,9 +155,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#405ae8',
     alignItems:'center',
     justifyContent:'center',
-    
-    
-
+  },
+  
+  noteText:{
+    fontSize:20,
+    backgroundColor:'green'
   },
 
   hetextInputader:{

@@ -9,11 +9,19 @@ export default class Note extends React.Component {
      <View style={styles.notes}>
        <Text style={styles.noteText}>{this.props.noteDate}</Text>
        <Text style={styles.noteText}>{this.props.note}</Text>
-
-       <TouchOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
+{/* 
+       <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
          <Text style={this.styles.noteDeleteText}>Delete</Text>
-       </TouchOpacity>
+       </TouchableOpacity> */}
      </View>
     );
   }
+
+  deleteMethod(){
+
+  }
 }
+
+const styles = StyleSheet.create({  
+
+});
