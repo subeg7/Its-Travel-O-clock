@@ -11,7 +11,7 @@ export default class Main extends React.Component {
       noteArray:[],
       noteText:'',
       newNote:'',
-      myArray:["default"]
+      myArray:[]
     }
 
     this.countValue=0;
@@ -38,6 +38,12 @@ export default class Main extends React.Component {
 
        {/* <ScrollView style={styles.scrollContainer}> */}
        {myNotes}
+       {/* </ScrollView> */}
+
+       <Note note="static element added" date="2045/23/13" key={10}/>
+       {/* <Note note="testura" date="2045/23/13"/>
+       <Note note="amellulua" date="2045/23/13"/>
+       <Note note="Generational" date="2045/23/13"/> */}
          {/* <Text style={styles.noteText}>{this.state.myArray}</Text>  */}
          {/* {this.state.noteArray} */}
        {/* </ScrollView > */}
@@ -69,7 +75,7 @@ export default class Main extends React.Component {
 
     // this.state.myArray.push("pushed item");
     arr=this.state.myArray;
-    arr.push(++this.countValue+")> "+this.state.noteText);
+    arr.push(this.state.noteText);
     
     // this.state.myArray=arr;
     this.setState({myArray:arr});
@@ -78,10 +84,10 @@ export default class Main extends React.Component {
 
     // console.log("add note is triigered");
 
-      var d  = new Date();
+    var d  = new Date();
     var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
-    let newNote1 = <Note note="key_from_main_is_Injected" noteDate="injected_prop" /> 
-    let newNote2 = <Note note="note_2" noteDate="date_2" /> 
+    // let newNote1 = <Note note="key_from_main_is_Injected" noteDate="injected_prop" /> 
+    // let newNote2 = <Note note="note_2" noteDate="date_2" /> 
     // arr = array(newNote1,newNote2);
     // this.state.noteArray.push(newNote1);
     // this.state.note
@@ -133,7 +139,9 @@ const styles = StyleSheet.create({
   },
 
   scrollContainer:{
+    marginTop:-50,
     color: '#0ff',
+    height:100,
   },
 
   footer:{
