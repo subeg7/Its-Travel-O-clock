@@ -10,28 +10,34 @@ export default class Main extends React.Component {
     this.state={
       noteArray:[],
       noteText:'',
+      newNote:''
     }
   }
   render() {
-    let notes = this.state.noteArray.map( (val,key)=>{
-      return <Note key={key} keyval={key} val={val}
-        deleteMethod={()=>this.deleteNote(key)}/>
-    });
+    // let notes = this.state.noteArray.map( (val,key)=>{
+    //   return <Note key={key} keyval={key} val={val}
+    //     deleteMethod={()=>this.deleteNote(key)}/>
+    // });
+
+    let notes = ["hello theres","is this amazing"];
+
     return (
       <View style={styles.container}>
        <View style={styles.header}>
          <Text style={styles.headerText}>-Noter-</Text>
        </View>
 
-       {/* <ScrollView style={styles.scrollContainer}>
-
-       </ScrollView > */}
+       {/* <ScrollView style={styles.scrollContainer}> */}
+       {/* {notes} */}
+         {/* <Text>{}</Text>  */}
+         {this.state.noteArray}
+       {/* </ScrollView > */}
 
        <View style={styles.footer}>
          <TextInput style={styles.textInput} 
          onChangeText={(noteText)=>this.setState({noteText})}
          value={this.state.noteText}
-         placeholder="note" 
+         placeholder="type the new note here" 
          placeholderTextColor="green">
          </TextInput>
        </View>
@@ -46,22 +52,50 @@ export default class Main extends React.Component {
   }
 
   addNote(){
+
+
+    // console.log("add note is triigered");
+
+    // if(this.state.noteText){
+      var d  = new Date();
+    var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
+    let newNote1 = <Note note="key_from_main_is_Injected" noteDate="injected_prop" /> 
+    let newNote2 = <Note note="note_2" noteDate="date_2" /> 
+    arr = array(newNote1,newNote2);
+    // this.state.noteArray.push(newNote1);
+    // this.state.note
+
+    // this.setState(noteArray:<Note note="key_from_main_is_Injected" noteDate="injected_prop" /> );
+
+      // tempNote.props.noteDate =currDate;
+    // console.log("tempNote date"+currDate);
+    // console.log("tempNote date"+tempNote.props.date);
+
+      // console.log("add note is triigered");
+      // alert("add note is triigered");
+
+      // this.state.noteArray.push({
+      //   'date':d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()
+      // });
     
-    alert('test passed');
-  }
+      // this.setState({noteArray:this.state.noteText});
+      // this.setState({noteText:''});
+  // }
 }
 
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  
   },
   headerText:{
     color: 'red',
-    fontSize:18,
-    padding:26,
+    fontSize:25,
+    padding:70,
   },
 
   header:{
