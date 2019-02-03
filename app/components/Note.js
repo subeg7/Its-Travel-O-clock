@@ -6,10 +6,10 @@ import { ScrollView, TextInput,TouchableOpacity } from 'react-native-gesture-han
 export default class Note extends React.Component {
   render() {
     return (
-     <View style={styles.note} >
+     <View key={this.props.keyVal} style={styles.note} >
        <Text style={styles.noteText}>{this.props.note}</Text>
-       <Text style={styles.noteText}>{this.props.date}</Text>
-       <Text style={styles.noteText}>{this.props.key}</Text>
+       <Text style={styles.noteText}>created on :{this.props.date}</Text>
+       {/* <Text style={styles.noteText}>{this.props.keyVal}</Text> */}
 
        <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
          <Text style={styles.noteDeleteText}>D</Text>
@@ -18,9 +18,9 @@ export default class Note extends React.Component {
     );
   }
 
-  deleteMethod(){
+  // deleteMethod(){
 
-  }
+  // }
 }
 
 const styles = StyleSheet.create({  
@@ -36,12 +36,12 @@ const styles = StyleSheet.create({
     borderColor:"#a4b942",
     marginBottom:10,
     width:300,
-    height:60,
+    height:80,
     backgroundColor:"#a4b942"
 
   },
   noteDelete: {
-    position:'absolute',
+    // position:'absolute',
     // flex:2,
     // justifyContent:'center',
     // alignItems:'center',
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     borderLeftColor:"#f4b942",
     backgroundColor:"#f4b942",
     color:'blue',
+    height:30,
     // flex:1,
     // fontSize:20
   },

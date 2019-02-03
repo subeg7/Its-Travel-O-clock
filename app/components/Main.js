@@ -26,24 +26,26 @@ export default class Main extends React.Component {
     // let notes = this.state.noteArray.map( (x) =>"this is amazing");
 
     let myNotes = this.state.myArray.map( (x)=>{
-        return <Note noteDate={x} />
+      var d  = new Date();
+    var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
+        return <Note note={x} keyVal={++this.countValue} date={currDate} deleteMethod={this.deleteMethod} />
         // console.log("value of x:"+x);
     });
 
     return (
       <View style={styles.container}>
        <View style={styles.header}>
-         <Text style={styles.headerText}>-Noter-</Text>
+         <Text style={styles.headerText}>Noter</Text>
        </View>
 
        {/* <ScrollView style={styles.scrollContainer}> */}
        {myNotes}
        {/* </ScrollView> */}
 
-       <Note note="static element added" date="2045/23/13" key={10}/>
-       {/* <Note note="testura" date="2045/23/13"/>
-       <Note note="amellulua" date="2045/23/13"/>
-       <Note note="Generational" date="2045/23/13"/> */}
+       {/* <Note note="static element added" date="2045/23/13" keyVal={++this.countValue}/> */}
+        <Note note="testura" date="2045/23/13" deleteMethod={this.deleteMethod}/>
+      {/* <Note note="amellulua" date="2045/23/13"/>  */}
+       <Note note="Generational" date="2045/23/13" deleteMethod={this.deleteMethod}/> 
          {/* <Text style={styles.noteText}>{this.state.myArray}</Text>  */}
          {/* {this.state.noteArray} */}
        {/* </ScrollView > */}
@@ -66,6 +68,10 @@ export default class Main extends React.Component {
        </TouchableOpacity>
       </View>
     );
+  }
+
+  deleteMethod(){
+    console.log("deletion triggered");
   }
 
   // let count=0;
@@ -122,12 +128,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  
+    marginTop:-600,
+  // position:'absolute'
   },
   headerText:{
     color: 'red',
-    fontSize:25,
-    padding:70,
+    fontSize:30,
+    paddingLeft:170,
+    paddingTop:20,
+    paddingRight:170,
   },
 
   header:{
@@ -149,7 +158,9 @@ const styles = StyleSheet.create({
   },
   addButton:{
     color: 'white',
-    fontSize:55
+    fontSize:55,
+    position:'relative',
+    // paddingTop:20
   },
   buttonText:{
     // position:'absolute',
@@ -163,11 +174,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#405ae8',
     alignItems:'center',
     justifyContent:'center',
+    // marginTop:600
+    
   },
   
   noteText:{
     fontSize:20,
-    backgroundColor:'green'
+    backgroundColor:'green',
+    
   },
 
   hetextInputader:{
