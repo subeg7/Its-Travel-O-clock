@@ -15,6 +15,7 @@ export default class Main extends React.Component {
     }
 
     this.countValue=0;
+
   }
   render() {
     
@@ -26,9 +27,10 @@ export default class Main extends React.Component {
     // let notes = this.state.noteArray.map( (x) =>"this is amazing");
 
     let myNotes = this.state.myArray.map( (x)=>{
+      var keyCount = "dynamic_note_"+ ++this.countValue;
       var d  = new Date();
     var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
-        return <Note note={x} keyVal={++this.countValue} date={currDate} deleteMethod={this.deleteMethod} />
+        return <Note note={x} keyVal={keyCount} date={currDate} deleteMethod={this.deleteMethod(keyCount)} />
         // console.log("value of x:"+x);
     });
 
@@ -43,9 +45,9 @@ export default class Main extends React.Component {
        {/* </ScrollView> */}
 
        {/* <Note note="static element added" date="2045/23/13" keyVal={++this.countValue}/> */}
-        <Note note="testura" date="2045/23/13" deleteMethod={this.deleteMethod}/>
+        <Note note="testura" date="2045/23/13" keyVal={++this.countValue} deleteMethod={this.deleteMethod("static_note_2")}/>
       {/* <Note note="amellulua" date="2045/23/13"/>  */}
-       <Note note="Generational" date="2045/23/13" deleteMethod={this.deleteMethod}/> 
+       <Note note="Generational" date="2045/23/13" keyVal={++this.countValue} deleteMethod={this.deleteMethod("static_note_1")} /> 
          {/* <Text style={styles.noteText}>{this.state.myArray}</Text>  */}
          {/* {this.state.noteArray} */}
        {/* </ScrollView > */}
@@ -70,8 +72,9 @@ export default class Main extends React.Component {
     );
   }
 
-  deleteMethod(){
-    console.log("deletion triggered");
+  deleteMethod(key){
+    console.log("deletion triggered by:<><>><"+key);
+    // this.state.noteArray.splice(key,1);
   }
 
   // let count=0;
