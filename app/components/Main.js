@@ -19,18 +19,11 @@ export default class Main extends React.Component {
   }
   render() {
     
-    // let notes = this.state.noteArray.map( (val,key)=>{
-    //   return <Note key={key} keyval={key} val={val}
-    //     deleteMethod={()=>this.deleteNote(key)}/>
-    // });
-
-    // let notes = this.state.noteArray.map( (x) =>"this is amazing");
-
     let myNotes = this.state.myArray.map( (x)=>{
       var keyCount = "dynamic_note_"+ ++this.countValue;
       var d  = new Date();
     var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
-        return <Note note={x} keyVal={keyCount} date={currDate} deleteMethod={this.deleteMethod(keyCount)} />
+        return <Note   note={x} keyVal={keyCount} date={currDate} deleteMethod={this.deleteMethod(keyCount)} />
         // console.log("value of x:"+x);
     });
 
@@ -40,31 +33,26 @@ export default class Main extends React.Component {
          <Text style={styles.headerText}>Noter</Text>
        </View>
 
-       {/* <ScrollView style={styles.scrollContainer}> */}
        {myNotes}
-       {/* </ScrollView> */}
 
        {/* <Note note="static element added" date="2045/23/13" keyVal={++this.countValue}/> */}
-        <Note note="testura" date="2045/23/13" keyVal={++this.countValue} deleteMethod={this.deleteMethod("static_note_2")}/>
+        <Note note="testura" date="2045/23/13" keyVal={++this.countValue} deleteMethod={()=>this.deleteMethod("static_note_2")}/>
       {/* <Note note="amellulua" date="2045/23/13"/>  */}
-       <Note note="Generational" date="2045/23/13" keyVal={++this.countValue} deleteMethod={this.deleteMethod("static_note_1")} /> 
+       <Note note="Generational" date="2045/23/13" keyVal={++this.countValue} deleteMethod={()=>this.deleteMethod("static_note_1")} /> 
          {/* <Text style={styles.noteText}>{this.state.myArray}</Text>  */}
          {/* {this.state.noteArray} */}
        {/* </ScrollView > */}
 
-       <View style={styles.footer}>
-         <TextInput style={styles.textInput} 
-         onChangeText={(noteText)=>this.setState({noteText})}
-         value={this.state.noteText}
-         placeholder="type the new note here" 
-         placeholderTextColor="green">
-         </TextInput>
-       </View>
-
-       {/* <Text>{this.state.noteText}</Text> */}
+       <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={(text) => this.setState({noteText:text})}
+        value={this.state.text}
+      />
+       
+      
 
        <TouchableOpacity 
-       onPress={this.addNote.bind(this)}
+       onPress={this.addNote}
        style={styles.buttonText}>
         <Text style={styles.addButton}>+</Text>
        </TouchableOpacity>
@@ -73,54 +61,18 @@ export default class Main extends React.Component {
   }
 
   deleteMethod(key){
-    console.log("deletion triggered by:<><>><"+key);
-    // this.state.noteArray.splice(key,1);
+    console.log("deletion triggered by!!!!"+key);
   }
 
-  // let count=0;
 
   addNote(){
     if(this.state.noteText){
-
-    // this.state.myArray.push("pushed item");
-    arr=this.state.myArray;
-    arr.push(this.state.noteText);
-    
-    // this.state.myArray=arr;
-    this.setState({myArray:arr});
-    this.setState({noteText:''});
-
-
-    // console.log("add note is triigered");
-
-    var d  = new Date();
-    var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
-    // let newNote1 = <Note note="key_from_main_is_Injected" noteDate="injected_prop" /> 
-    // let newNote2 = <Note note="note_2" noteDate="date_2" /> 
-    // arr = array(newNote1,newNote2);
-    // this.state.noteArray.push(newNote1);
-    // this.state.note
-
-    // this.setState(noteArray:<Note note="key_from_main_is_Injected" noteDate="injected_prop" /> );
-
-      // tempNote.props.noteDate =currDate;
-    // console.log("tempNote date"+currDate);
-    // console.log("tempNote date"+tempNote.props.date);
-
-      // console.log("add note is triigered");
-      // alert("add note is triigered");
-
-      // this.state.noteArray.push({
-      //   'date':d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()
-      // });
-      // this.setState({noteArray:this.state.noteText});
-
-      // console.log("printing the notearray"+this.state.noteArray.toString());
-      // this.state.noteArray.toString();
-
-      // console.log("noteArray__>"+this.state.noteArray[0]);
-    
-      // this.setState({noteText:''});
+      //if something is typed
+      arr=this.state.myArray;
+      arr.push(this.state.noteText);
+      
+      this.setState({myArray:arr});
+      this.setState({noteText:''});
   }
 }
 
@@ -132,7 +84,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop:-600,
-  // position:'absolute'
   },
   headerText:{
     color: 'red',

@@ -14,10 +14,20 @@ export default class Note extends React.Component {
        <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
          <Text style={styles.noteDeleteText}>D</Text>
        </TouchableOpacity>
+
+       <View style={{padding: 30}}>
+    {/* <TextInput placeholder="default" onSubmitEditing={this.func}/> */}
+ </View>
+
+
      </View>
     );
   }
 
+
+  func(){
+    console.log("func is called");
+  }
   // deleteMethod(){
 
   // }
