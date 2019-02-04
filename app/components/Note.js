@@ -8,8 +8,8 @@ export default class Note extends React.Component {
     return (
      <View key={this.props.keyVal} style={styles.note} >
        <Text style={styles.noteText}>{this.props.note}</Text>
-       <Text style={styles.noteText}>created on :{this.props.date}</Text>
-       {/* <Text style={styles.noteText}>{this.props.keyVal}</Text> */}
+       {/* <Text style={styles.noteText}>created on :{this.props.date}</Text> */}
+       <Text style={styles.noteText}>key:{this.props.keyVal}</Text>
 
        <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
          <Text style={styles.noteDeleteText}>D</Text>
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor:"#f4b942",
     color:'blue',
     height:30,
+    width:200,
     // flex:1,
     // fontSize:20
   },

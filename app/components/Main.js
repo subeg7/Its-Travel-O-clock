@@ -18,12 +18,11 @@ export default class Main extends React.Component {
 
   }
   render() {
-    
-    let myNotes = this.state.myArray.map( (x)=>{
-      var keyCount = "dynamic_note_"+ ++this.countValue;
+    let myNotes = this.state.myArray.map( (text)=>{
+      var keyCount = text;
       var d  = new Date();
-    var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
-        return <Note   note={x} keyVal={keyCount} date={currDate} deleteMethod={this.deleteMethod(keyCount)} />
+      var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
+        return <Note   note={text} keyVal={keyCount} date={currDate} deleteMethod={()=>this.deleteMethod(keyCount)} />
         // console.log("value of x:"+x);
     });
 
@@ -35,24 +34,22 @@ export default class Main extends React.Component {
 
        {myNotes}
 
-       {/* <Note note="static element added" date="2045/23/13" keyVal={++this.countValue}/> */}
-        <Note note="testura" date="2045/23/13" keyVal={++this.countValue} deleteMethod={()=>this.deleteMethod("static_note_2")}/>
-      {/* <Note note="amellulua" date="2045/23/13"/>  */}
-       <Note note="Generational" date="2045/23/13" keyVal={++this.countValue} deleteMethod={()=>this.deleteMethod("static_note_1")} /> 
-         {/* <Text style={styles.noteText}>{this.state.myArray}</Text>  */}
-         {/* {this.state.noteArray} */}
-       {/* </ScrollView > */}
+       {/* <Note note="testura" date="2045/23/13" keyVal={"static_note_1"} deleteMethod={()=>this.deleteMethod("static_note_1")}/> */}
+       {/* <Note note="Generational" date="2045/23/13" keyVal={"static_note_2"} deleteMethod={()=>this.deleteMethod("static_note_2")} />  */}
 
-       <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(text) => this.setState({noteText:text})}
-        value={this.state.text}
-      />
-       
-      
+       <View style={styles.footer}>
+         {/* <TextInput style={styles.textInput} 
+         onChangeText={(noteText)=>this.setState({noteText})}
+         value={this.state.noteText}
+         placeholder="type the new note here" 
+         placeholderTextColor="green">
+         </TextInput> */}
+       </View>
+
+       {/* <Text>{this.state.noteText}</Text> */}
 
        <TouchableOpacity 
-       onPress={this.addNote}
+       onPress={this.addNote.bind(this)}
        style={styles.buttonText}>
         <Text style={styles.addButton}>+</Text>
        </TouchableOpacity>
@@ -61,19 +58,41 @@ export default class Main extends React.Component {
   }
 
   deleteMethod(key){
-    console.log("deletion triggered by!!!!"+key);
+    console.log("Trying to delete:"+key);
+
+    console.log("before deleting");
+    this.state.myArray.forEach( function(text){
+      console.log(">>>>>"+text);
+    });
+    
+    var index = this.state.myArray.indexOf(key);//find the index of the key in array 
+    this.state.myArray.splice(index,1);//remove 1 element form positio index
+    this.setState({noteArray:this.state.myArray})
+    
+    console.log("after deleting!!!!!");
+    this.state.myArray.forEach( function(text){
+      console.log(">>>>>"+text);
+    });
   }
 
+  // let count=0;
 
   addNote(){
-    if(this.state.noteText){
-      //if something is typed
-      arr=this.state.myArray;
-      arr.push(this.state.noteText);
-      
-      this.setState({myArray:arr});
-      this.setState({noteText:''});
-  }
+    // if(this.state.noteText){
+
+
+    // this.state.myArray.push("pushed item");
+    // this.state.noteText="This is note Number:"+this.countValue++
+    arr=this.state.myArray;
+    arr.push("This is note Number:"+this.countValue++);
+    
+    // this.state.myArray=arr;
+    this.setState({myArray:arr});
+    this.setState({noteText:''});
+    console.log("note added");
+
+
+  // }
 }
 
 }
@@ -83,7 +102,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:-600,
+    // marginTop:-300,
+  // position:'absolute'
   },
   headerText:{
     color: 'red',
