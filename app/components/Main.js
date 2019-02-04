@@ -11,21 +11,35 @@ export default class Main extends React.Component {
       noteArray:[],
       noteText:'',
       newNote:'',
-      myArray:[]
+      myArray:[],
+      allNotes:[]
     }
 
     this.countValue=0;
+    // this.getKey=()=>this.getKey();
+    this.uniqueIncrement=0;
 
   }
+
+  getKey(){
+    return ++this.uniqueIncrement;
+  }
   render() {
-    let myNotes = this.state.myArray.map( (text)=>{
-      var keyCount = text;
+    console.log("...............................................render session started.................");
+    // this.displayA
+    
+    let myNotes = this.state.myArray.map( (text,index)=>{
       var d  = new Date();
       var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
-        return <Note   note={text} keyVal={keyCount} date={currDate} deleteMethod={()=>this.deleteMethod(keyCount)} />
-        // console.log("value of x:"+x);
-    });
 
+      var keyCount =this.getKey();
+
+      return <Note note={"bodynote_"+index} key={index} keyVal={index} date={currDate} deleteMethod={()=>this.deleteMethod(keyCount)} />
+    });
+  
+  this.DisplayArray();
+
+    console.log("session ended");
     return (
       <View style={styles.container}>
        <View style={styles.header}>
@@ -57,22 +71,35 @@ export default class Main extends React.Component {
     );
   }
 
-  deleteMethod(key){
-    console.log("Trying to delete:"+key);
-
-    console.log("before deleting");
-    this.state.myArray.forEach( function(text){
-      console.log(">>>>>"+text);
+  DisplayArray(){
+     console.log("<<<<<<<<<<<elements in array are>>>>>>>>>>>>>>>>>>");
+      this.state.myArray.forEach( function(text){
+      console.log(text);
     });
+    console.log("<<<<<<<<<<< array completed >>>>>>>>>>>>>>>>>>");
+
+  }
+
+  deleteMethod(key){
+
+    // console.log("before deleting");
+    // this.state.myArray.forEach( function(text){
+    //   console.log(">>>>>"+text);
+    // });
     
     var index = this.state.myArray.indexOf(key);//find the index of the key in array 
     this.state.myArray.splice(index,1);//remove 1 element form positio index
     this.setState({noteArray:this.state.myArray})
     
-    console.log("after deleting!!!!!");
-    this.state.myArray.forEach( function(text){
-      console.log(">>>>>"+text);
-    });
+    // console.log("after deleting!!!!!");
+    // this.state.myArray.forEach( function(text){
+    //   console.log(">>>>>"+text);
+    // });
+
+    console.log("!!!!!!!!!!!!!"+key+" deleted");
+
+
+
   }
 
   // let count=0;
@@ -84,12 +111,12 @@ export default class Main extends React.Component {
     // this.state.myArray.push("pushed item");
     // this.state.noteText="This is note Number:"+this.countValue++
     arr=this.state.myArray;
-    arr.push("This is note Number:"+this.countValue++);
+    arr.push("id_"+this.countValue++);
     
     // this.state.myArray=arr;
     this.setState({myArray:arr});
     this.setState({noteText:''});
-    console.log("note added");
+    // console.log("note added");
 
 
   // }
