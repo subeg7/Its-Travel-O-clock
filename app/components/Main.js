@@ -18,6 +18,7 @@ export default class Main extends React.Component {
     this.countValue=0;
     // this.getKey=()=>this.getKey();
     this.uniqueIncrement=0;
+    this.textInput="";
 
   }
 
@@ -34,7 +35,7 @@ export default class Main extends React.Component {
 
       var keyCount =this.getKey();
 
-      return <Note note={"bodynote_"+index} key={index} keyVal={index} date={currDate} deleteMethod={()=>this.deleteMethod(keyCount)} />
+      return <Note note={text} key={index} keyVal={index} date={currDate} deleteMethod={()=>this.deleteMethod(keyCount)} />
     });
   
   this.DisplayArray();
@@ -52,12 +53,15 @@ export default class Main extends React.Component {
        {/* <Note note="Generational" date="2045/23/13" keyVal={"static_note_2"} deleteMethod={()=>this.deleteMethod("static_note_2")} />  */}
 
        <View style={styles.footer}>
-         {/* <TextInput style={styles.textInput} 
-         onChangeText={(noteText)=>this.setState({noteText})}
-         value={this.state.noteText}
+         <TextInput style={styles.textInput} 
+         onChangeText={(noteText)=>{
+           this.textInput+= noteText;
+           console.log(textInput);
+         }}
+         value={this.textInput}
          placeholder="type the new note here" 
          placeholderTextColor="green">
-         </TextInput> */}
+         </TextInput> 
        </View>
 
        {/* <Text>{this.state.noteText}</Text> */}
@@ -82,19 +86,19 @@ export default class Main extends React.Component {
 
   deleteMethod(key){
 
-    // console.log("before deleting");
-    // this.state.myArray.forEach( function(text){
-    //   console.log(">>>>>"+text);
-    // });
+    console.log("before deleting");
+    this.state.myArray.forEach( function(text){
+      console.log(">>>>>"+text);
+    });
     
     var index = this.state.myArray.indexOf(key);//find the index of the key in array 
     this.state.myArray.splice(index,1);//remove 1 element form positio index
     this.setState({noteArray:this.state.myArray})
     
-    // console.log("after deleting!!!!!");
-    // this.state.myArray.forEach( function(text){
-    //   console.log(">>>>>"+text);
-    // });
+    console.log("after deleting!!!!!");
+    this.state.myArray.forEach( function(text){
+      console.log(">>>>>"+text);
+    });
 
     console.log("!!!!!!!!!!!!!"+key+" deleted");
 
@@ -105,13 +109,13 @@ export default class Main extends React.Component {
   // let count=0;
 
   addNote(){
-    // if(this.state.noteText){
+    if(this.state.noteText){
 
 
-    // this.state.myArray.push("pushed item");
-    // this.state.noteText="This is note Number:"+this.countValue++
+    this.state.myArray.push("pushed item");
+    this.state.noteText="This is note Number:"+this.countValue++
     arr=this.state.myArray;
-    arr.push("id_"+this.countValue++);
+    arr.push(this.state.noteText);
     
     // this.state.myArray=arr;
     this.setState({myArray:arr});
@@ -119,7 +123,7 @@ export default class Main extends React.Component {
     // console.log("note added");
 
 
-  // }
+  }
 }
 
 }
