@@ -27,12 +27,14 @@
 var React = require('react-native');
 var {AppRegistry, StyleSheet , Text,View} = React;
 var Login = require('./app/components/login');
-var userReducers = require('./src/reducers/user');
+var userReducers = require('./app/reducers/user');
 
-import{ createStore,combineReducers} from 'react-redux';
-import {Provider} from 'react-redux/native';
+import{ createStore} from 'redux';
+import {combineReducers}from 'redux';
+import {Provider} from 'react-redux';
+// import userReducers from './app/reducers/user'
 
-let store = createStore(combineReducers({userReduccers}));
+let store = createStore(combineReducers({userReducers}));
 
 class App extends React.Components{
   render(){
@@ -51,3 +53,5 @@ class MyApp extends React.Component{
     )
   }
 }
+
+export default store;

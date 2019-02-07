@@ -1,14 +1,22 @@
-var React = require('react-native');
-import {bindActionCreators} from 'redux';
-import {connect}  from 'react-redux/native';
+// var React = require('react-native');
+import React from 'react';
+React.createClass=require('create-react-class');
+
+import {
+  Text,
+  View,
+  TouchableHighlight
+} from 'react-native';
+import {bindActionCreators} from 'react-redux';
+import {connect}  from 'react-redux';
 import * as Action from '../actions';
 
 function mapStateToProps(state){return {user:state.userReducers.user};}
 function mapDispatchToProps(dispatch){return bindActionCreators(Actions,dispatch);}
 
-var {View,TouchableHighlight, Text}=React;
+// var {View,TouchableHighlight, Text}=React;
 
-var Login = React.createClass({
+var Login =React.createClass({
     onLoginButtonPress(){
         this.props.login({
             userName:'testUser',

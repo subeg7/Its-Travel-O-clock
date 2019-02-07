@@ -8,7 +8,7 @@ let cloneObject = function(obj){
 
 let newState = {user:{loggedIn:false}};
 
-export default function (state,action){
+export  default function (state,action){
     switch (action.type){
         case LOGIN_SUCCESS:
             newState = cloneObject(state);
