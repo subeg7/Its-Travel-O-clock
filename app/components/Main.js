@@ -2,6 +2,57 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ScrollView, TextInput,TouchableOpacity } from 'react-native-gesture-handler';
 import Note from './Note';
+import { createStore } from 'redux';
+import {NoteReducer} from '../reducers/noteReducer'
+import {combineReducers}from 'redux';
+
+
+
+
+function myReducer(state,action){
+  console.log("reducer state:"+state);
+  return state;
+  switch(action.type) {
+    case 'add_note' : {
+      console.log("Reducer state:>"+state);
+      // return state.concat([action.note]);
+      return state;
+    }
+    case 'delete_note' : {
+      console.log("Reducer is trying to delete");
+      return state;
+    }
+    default :{ return state;
+    }
+  }
+
+}
+
+
+// addNote(){
+//   // if(this.state.noteText){
+//   // console.log("adding note");
+
+//   // this.state.myArray.push("pushed item");
+//   // this.state.noteText="This is note Number:"+this.countValue++
+//   tempText="This is note Number:"+this.countValue++
+//   arr=this.state.myArray;
+//   arr.push(tempText);
+  
+//   // this.state.myArray=arr;
+//   this.setState({myArray:arr});
+//   // this.setState({noteText:''});
+//   console.log("note added");
+
+
+
+// // }
+// }
+
+
+// const store = createStore(combineReducers({noteR:NoteReducer}));
+const store = createStore(myReducer,['state_init_at_store']);
+
 
 export default class Main extends React.Component {
 
@@ -26,17 +77,23 @@ export default class Main extends React.Component {
     return ++this.uniqueIncrement;
   }
   render() {
+    store.dispatch({
+      type:'add_note',
+      note:'this note is amazing'
+    });
+    console.log("current_state:"+store.getState());
     console.log("...............................................render session started.................");
     // this.displayA
-    
-    let myNotes = this.state.myArray.map( (text,index)=>{
-      var d  = new Date();
-      var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
+    let myNotes;
+    // let myNotes = store.getState().map( (text,index)=>{
 
-      var keyCount =this.getKey();
+    //   var d  = new Date();
+    //   var currDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
 
-      return <Note note={text} key={index} keyVal={index} date={currDate} deleteMethod={()=>this.deleteMethod(keyCount)} />
-    });
+    //   var keyCount =this.getKey();
+
+    //   return <Note note={text} key={index} keyVal={index} date={currDate} deleteMethod={()=>this.deleteMethod(keyCount)} />
+    // });
   
   this.DisplayArray();
 
@@ -67,7 +124,11 @@ export default class Main extends React.Component {
        {/* <Text>{this.state.noteText}</Text> */}
 
        <TouchableOpacity 
-       onPress={this.addNote.bind(this)}
+    // store.dispatch(addAction);
+       onPress={()=>store.dispatch({
+         type:'add_note',
+         note:'this note is amazing'
+       })}
        style={styles.buttonText}>
         <Text style={styles.addButton}>+</Text>
        </TouchableOpacity>
@@ -108,26 +169,7 @@ export default class Main extends React.Component {
 
   // let count=0;
 
-  addNote(){
-    // if(this.state.noteText){
-    // console.log("adding note");
-
-    // this.state.myArray.push("pushed item");
-    // this.state.noteText="This is note Number:"+this.countValue++
-    tempText="This is note Number:"+this.countValue++
-    arr=this.state.myArray;
-    arr.push(tempText);
-    
-    // this.state.myArray=arr;
-    this.setState({myArray:arr});
-    // this.setState({noteText:''});
-    console.log("note added");
-
-    store.dispatch(addAction);
-
-
-  // }
-}
+  
 
 }
 const styles = StyleSheet.create({

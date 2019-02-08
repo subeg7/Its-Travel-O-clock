@@ -4,44 +4,11 @@ import { createStore } from 'redux';
 
 import Main from'./app/components/Main';
 
-function myReducer(state,action){
-  switch(action.type) {
-    case 'TODO_ADD' : {
-      console.log("Reducer is trying to add the list");
-      return state;
-    }
-    case 'TODO_TOGGLE' : {
-      console.log("Reducer is trying to Toogle");
-      return state;
-    }
-    default : return state;
-  }
-
-}
-
-
-const store = createStore(myReducer);
-
-addAction={
-  type: 'TODO_ADD',
-  todo: { id: '0', name: 'learn redux', completed: false }
-}
-
 export default class App extends React.Component {
-// start();
-
-// start(){
-//   console.log("startig the redux");
-// }
-
-// 
-
   render() {
 
     return (
-      // <View>
-      //     <Text>Hello Man</Text>
-      // </View>
+      
       <Main/>
     );
   }

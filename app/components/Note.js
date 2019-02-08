@@ -11,7 +11,11 @@ export default class Note extends React.Component {
        {/* <Text style={styles.noteText}>created on :{this.props.date}</Text> */}
        <Text style={styles.noteText}>key:{this.props.keyVal}</Text>
 
-       <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
+       <TouchableOpacity onPress={store.dispatch({
+            type:'delete_note',
+            index:this.props.keyVal
+          })}
+     style={styles.noteDelete}>
          <Text style={styles.noteDeleteText}>D</Text>
        </TouchableOpacity>
 
