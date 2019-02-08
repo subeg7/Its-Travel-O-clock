@@ -53,7 +53,7 @@ export default class Main extends React.Component {
        {/* <Note note="Generational" date="2045/23/13" keyVal={"static_note_2"} deleteMethod={()=>this.deleteMethod("static_note_2")} />  */}
 
        <View style={styles.footer}>
-         <TextInput style={styles.textInput} 
+         {/* <TextInput style={styles.textInput} 
          onChangeText={(noteText)=>{
            this.textInput+= noteText;
            console.log(textInput);
@@ -61,7 +61,7 @@ export default class Main extends React.Component {
          value={this.textInput}
          placeholder="type the new note here" 
          placeholderTextColor="green">
-         </TextInput> 
+         </TextInput>  */}
        </View>
 
        {/* <Text>{this.state.noteText}</Text> */}
@@ -109,21 +109,24 @@ export default class Main extends React.Component {
   // let count=0;
 
   addNote(){
-    if(this.state.noteText){
+    // if(this.state.noteText){
+    // console.log("adding note");
 
-
-    this.state.myArray.push("pushed item");
-    this.state.noteText="This is note Number:"+this.countValue++
+    // this.state.myArray.push("pushed item");
+    // this.state.noteText="This is note Number:"+this.countValue++
+    tempText="This is note Number:"+this.countValue++
     arr=this.state.myArray;
-    arr.push(this.state.noteText);
+    arr.push(tempText);
     
     // this.state.myArray=arr;
     this.setState({myArray:arr});
-    this.setState({noteText:''});
-    // console.log("note added");
+    // this.setState({noteText:''});
+    console.log("note added");
+
+    store.dispatch(addAction);
 
 
-  }
+  // }
 }
 
 }

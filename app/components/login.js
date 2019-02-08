@@ -7,6 +7,7 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
+
 import {bindActionCreators} from 'react-redux';
 import {connect}  from 'react-redux';
 import * as Action from '../actions';
