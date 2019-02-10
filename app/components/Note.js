@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ScrollView, TextInput,TouchableOpacity } from 'react-native-gesture-handler';
 
 
+
 export default class Note extends React.Component {
   render() {
     return (
@@ -11,10 +12,10 @@ export default class Note extends React.Component {
        {/* <Text style={styles.noteText}>created on :{this.props.date}</Text> */}
        <Text style={styles.noteText}>key:{this.props.keyVal}</Text>
 
-       <TouchableOpacity onPress={store.dispatch({
-            type:'delete_note',
-            index:this.props.keyVal
-          })}
+       <TouchableOpacity //onPress={store.dispatch({
+            // type:'delete_note',
+            // index:this.props.keyVal
+          // })}
      style={styles.noteDelete}>
          <Text style={styles.noteDeleteText}>D</Text>
        </TouchableOpacity>

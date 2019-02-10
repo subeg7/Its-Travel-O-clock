@@ -7,11 +7,26 @@ import {NoteReducer} from '../reducers/noteReducer'
 import {combineReducers}from 'redux';
 
 
+const initialState = {
+  note_text:"the initial text",
+  text_array: []
+}
+
+const mapStateToProps = state => {
+  return {
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+  }
+}
+
+let note_count=0;
 
 
-function myReducer(state,action){
-  console.log("reducer state:"+state);
-  return state;
+function myReducer(state = initialState,action){
+  console.log("reducer state:"+state.text_array);
+  return Object.assign({}, state, {
+    text_array:state.text_array.concat(["reducer changed the state "+ ++note_count+" times"])
+  })
+  // return state.note_text;
   switch(action.type) {
     case 'add_note' : {
       console.log("Reducer state:>"+state);
@@ -51,31 +66,34 @@ function myReducer(state,action){
 
 
 // const store = createStore(combineReducers({noteR:NoteReducer}));
-const store = createStore(myReducer,['state_init_at_store']);
+const store = createStore(myReducer,initialState);
 
 
 export default class Main extends React.Component {
 
-  constructor(props){
-    super(props);
-    this.state={
-      noteArray:[],
-      noteText:'',
-      newNote:'',
-      myArray:[],
-      allNotes:[]
-    }
+  // constructor(props){
+  //   super(props);
+  //   // this.state={
+  //   //   noteArray:[],
+  //   //   noteText:'',
+  //   //   newNote:'',
+  //   //   myArray:[],
+  //   //   allNotes:[]
+  //   // }
 
-    this.countValue=0;
-    // this.getKey=()=>this.getKey();
-    this.uniqueIncrement=0;
-    this.textInput="";
+  //   this.countValue=0;
+  //   // this.getKey=()=>this.getKey();
+  //   this.uniqueIncrement=0;
+  //   this.textInput="";
 
-  }
+  // }
 
   getKey(){
     return ++this.uniqueIncrement;
   }
+
+
+  
   render() {
     store.dispatch({
       type:'add_note',
@@ -84,7 +102,7 @@ export default class Main extends React.Component {
     console.log("current_state:"+store.getState());
     console.log("...............................................render session started.................");
     // this.displayA
-    let myNotes;
+    // let myNotes;
     // let myNotes = store.getState().map( (text,index)=>{
 
     //   var d  = new Date();
@@ -95,19 +113,19 @@ export default class Main extends React.Component {
     //   return <Note note={text} key={index} keyVal={index} date={currDate} deleteMethod={()=>this.deleteMethod(keyCount)} />
     // });
   
-  this.DisplayArray();
+  // this.DisplayArray();
 
-    console.log("session ended");
+    console.log("!!!!!!!!!!!!!!!!!!!session ended!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     return (
       <View style={styles.container}>
        <View style={styles.header}>
          <Text style={styles.headerText}>Noter</Text>
        </View>
 
-       {myNotes}
+       {/* {myNotes} */}
 
-       {/* <Note note="testura" date="2045/23/13" keyVal={"static_note_1"} deleteMethod={()=>this.deleteMethod("static_note_1")}/> */}
-       {/* <Note note="Generational" date="2045/23/13" keyVal={"static_note_2"} deleteMethod={()=>this.deleteMethod("static_note_2")} />  */}
+       <Note note="testura" date="2045/23/13" keyVal={"static_note_1"} deleteMethod={()=>this.deleteMethod("static_note_1")}/>
+       <Note note="Generational" date="2045/23/13" keyVal={"static_note_2"} deleteMethod={()=>this.deleteMethod("static_note_2")} /> 
 
        <View style={styles.footer}>
          {/* <TextInput style={styles.textInput} 
