@@ -6,11 +6,15 @@ import { createStore } from 'redux';
 import {NoteReducer} from '../reducers/noteReducer'
 import {combineReducers}from 'redux';
 
+
+
 export default class Main extends React.Component {
   render(){
     return(
       <View>
-      <Text>Hello Redux</Text>
+      <TouchableOpacity>
+         <Text>Hello Redux</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -23,8 +27,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    // marginTop:-300,
-  // position:'absolute'
   },
   headerText:{
     color: 'red',
