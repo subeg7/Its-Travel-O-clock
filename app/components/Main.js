@@ -1,35 +1,31 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from '../reducers/test';
-import Home from './home';
-// import AppNavigator from './AppNavigator';
-
-const store = createStore(reducer);
+import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, TextInput,TouchableOpacity } from 'react-native-gesture-handler';
+import Footer from './Footer'
+import Todo from './Todo'
+// import AddTodo from '../containers/AddTodo'
+// import VisibleTodoList from '../containers/VisibleTodoList'
 
 export default class Main extends React.Component {
-  constructor(props) {
-    super(props)
-    // ...
-  }
-
-  addFriend = (index) => {
-    // ...
-  }
-
   render() {
     return (
-      // <Home currentFriends={"10"}/>
-      <Provider store={ store }>
-            <Home
-              screenProps={ {
-                  currentFriends: this.state.currentFriends,
-                  possibleFriends: this.state.possibleFriends,
-                  addFriend: this.addFriend,
-                } }
-
-            />
-      </Provider>
+      <View style={styles.container}>
+        <Text>Redux on fire </Text>
+        <Todo />
+        <Footer />
+      </View>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  container:{
+    width: '100%',
+     height: '100%',
+     justifyContent: 'center',
+     alignItems: 'center'
+
+  }
+
+});
