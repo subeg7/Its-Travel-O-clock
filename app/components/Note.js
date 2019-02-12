@@ -3,6 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ScrollView, TextInput,TouchableOpacity } from 'react-native-gesture-handler';
 
 
+
+
+
 export default class Note extends React.Component {
   render() {
     return (
