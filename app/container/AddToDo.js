@@ -16,8 +16,6 @@ export default class Main extends React.Component {
         <Text>Redux on fire </Text>
         
         
-        <Text>Redux on fire </Text>
-        <Text>Redux on fire </Text>
         
       </View>
     );

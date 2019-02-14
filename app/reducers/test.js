@@ -1,1 +1,2 @@
-import { combineReducers } from 'redux';
+        // <Text>Redux on fire </Text>
+        import { combineReducers } from 'redux';
