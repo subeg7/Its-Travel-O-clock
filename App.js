@@ -1,60 +1,103 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { createStore } from 'redux';
+// App.js
 
-import Main from'./app/components/Main';
+import React, { Component } from 'react';
+import { StyleSheet, View, TextInput, Button, FlatList } from 'react-native';
+import ListItem from './components/ListItem';
+import { connect } from 'react-redux';
+import { addPlace } from './actions/place';
 
-export default class App extends React.Component {
-  render() {
+class App extends Component {
 
-    return (
-      
-      <Main/>
+  state = {
+    placeName: '',
+    places: []
+  }
+
+  placeSubmitHandler = () => {
+    if(this.state.placeName.trim() === '') {
+      return;
+    }
+    this.props.add(this.state.placeName);
+}
+
+placeNameChangeHandler = (value) => {
+  this.setState({
+    placeName: value
+  });    
+}
+
+placesOutput = () => {
+   return (
+    <FlatList style = { styles.listContainer }
+      data = { this.props.places }
+      keyExtractor={(item, index) => index.toString()}
+      renderItem = { info => (
+        <ListItem 
+          placeName={ info.item.value }
+        />
+      )}
+    />
+  )
+}
+
+render() {
+  return (
+    <View style={ styles.container }>
+      <View style = { styles.inputContainer }>
+        <TextInput
+          placeholder = "Seach Places"
+          style = { styles.placeInput }
+          value = { this.state.placeName }
+          onChangeText = { this.placeNameChangeHandler }
+        ></TextInput>
+        <Button title = 'Add' 
+          style = { styles.placeButton }
+          onPress = { this.placeSubmitHandler }
+        />
+        </View>
+        <View style = { styles.listContainer }>
+          { this.placesOutput() }
+        </View>
+      </View>
     );
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 30,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%'
+  },
+  placeInput: {
+    width: '70%'
+  },
+  placeButton: {
+    width: '30%'
+  },
+  listContainer: {
+    width: '100%'
+  }
+});
 
+const mapStateToProps = state => {
+  return {
+    places: state.places.places
+  }
+}
 
-// <TextInput
-//         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-//         onChangeText={(text) => this.setState({text})}
-//         value={this.state.text}
-//       />
+const mapDispatchToProps = dispatch => {
+  return {
+    add: (name) => {
+      dispatch(addPlace(name))
+    }
+  }
+}
 
-
-
-// ...this...this......this...this...this...this...this...this...this...this...this......this...this.
-// Redux components
-
-// var React = require('react-native');
-// var {AppRegistry, StyleSheet , Text,View} = React;
-// var Login = require('./app/components/login');
-// var userReducers = require('./app/reducers/user');
-
-// import{ createStore} from 'redux';
-// import {combineReducers}from 'redux';
-// import {Provider} from 'react-redux';
-// // import userReducers from './app/reducers/user'
-
-// let store = createStore(combineReducers({userReducers}));
-
-// class App extends React.Components{
-//   render(){
-//     return(
-//       <Login/>
-//     );
-//   }
-// }
-
-// class MyApp extends React.Component{
-//   render(){
-//     return(
-//       <Provider store ={store}>
-//         {()=> <App/>}
-//       </Provider>
-//     )
-//   }
-// }
-
-// export default store;
+export default connect(mapStateToProps, mapDispatchToProps)(App)
